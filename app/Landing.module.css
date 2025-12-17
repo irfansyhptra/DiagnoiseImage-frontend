@@ -1,0 +1,582 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap");
+
+
+/* === GLOBAL FONT & BACKGROUND (FULL HITAM) === */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  background: linear-gradient(
+    180deg,
+    #040404 0%,
+    #050505 40%,
+    #040404 100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+
+/* Animasi bola cahaya orbit konstan untuk tombol Start */
+.submitButton-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+}
+
+.submitButton-orbit-ball {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.5) 60%,
+    transparent 80%
+  );
+  filter: blur(8px);
+  box-shadow: 0 0 24px 6px white;
+  transform: rotate(0deg) translateX(54px) translateY(-50%);
+  animation: orbitCircle 4s linear infinite;
+}
+
+@keyframes orbitCircle {
+  0% {
+    transform: rotate(0deg) translateX(54px) translateY(-50%);
+  }
+  100% {
+    transform: rotate(360deg) translateX(54px) translateY(-50%);
+  }
+}
+
+
+/* ====== CONTAINER UTAMA ====== */
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;              /* penting: tidak ada padding yang bikin gap */
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+
+/* dekor blur dimatikan (biar full gelap) */
+.gradientWrapper {
+  position: fixed;         /* ikut viewport, bukan main */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.blueBlur,
+.purpleBlur,
+.magentaBlur {
+  display: none;
+}
+
+
+/* ===== HERO SECTION: VIDEO FULL-BLEED DI SINI AJA ===== */
+.heroSection {
+  position: relative;
+  width: 100vw;            /* full sampai ujung kiri-kanan */
+  min-height: 100vh;       /* full tinggi viewport */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Video background isi penuh heroSection */
+.heroBgVideoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.heroBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* isi area hero, crop atas/bawah kalau perlu */
+  filter: brightness(0.82) saturate(1.1) blur(0.5px);
+  z-index: 1;
+}
+
+
+/* layout hero */
+.content {
+  position: relative;
+  z-index: 10;             /* di atas video */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;         /* jarak kiri-kanan, tidak mengganggu atas */
+  display: flex;
+  gap: 56px;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+/* left */
+.left {
+  flex: 1.1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(8, 7, 23, 0.95);
+  border: 1.5px solid rgba(168, 85, 247, 0.6);
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e0e7ff;
+  box-shadow: 0 4px 16px rgba(84, 0, 135, 0.3);
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.badgeDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00f5ff, #ff4fa6);
+  margin-right: 9px;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.9);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #e2e8ff 40%,
+    #c4b5fd 70%,
+    #a78bfa 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 18px;
+  line-height: 1.2;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* hanya judul pakai Bebas Neue */
+.bebasHeading {
+  font-family: "Bebas Neue", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.desc {
+  color: #e0e7ff;
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  max-width: 530px;
+  font-weight: 400;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.subDesc {
+  color: #c7d2fe;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  max-width: 530px;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.startButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 38px;
+  border-radius: 999px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+
+/* shadow/glow tambahan di belakang hero (opsional, boleh matikan) */
+.heroWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 32px;
+  background: radial-gradient(
+    circle at 50% 20%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(135, 0, 255, 0.25) 25%,
+    rgba(31, 19, 55, 0.1) 60%,
+    transparent 80%
+  );
+  filter: blur(18px);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+@keyframes breatheHero {
+  0% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 18px rgba(129, 140, 248, 0.55));
+  }
+  25% {
+    transform: translateY(-6px) scale(1.02) rotate(-1.5deg);
+    filter: drop-shadow(0 0 26px rgba(167, 139, 250, 0.7));
+  }
+  50% {
+    transform: translateY(-10px) scale(1.04) rotate(0deg);
+    filter: drop-shadow(0 0 32px rgba(248, 250, 252, 0.85));
+  }
+  75% {
+    transform: translateY(-6px) scale(1.02) rotate(1.5deg);
+    filter: drop-shadow(0 0 26px rgba(167, 139, 250, 0.7));
+  }
+  100% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 18px rgba(129, 140, 248, 0.55));
+  }
+}
+
+
+/* ===== OUR TEAM section ===== */
+.teamSection {
+  position: relative;
+  z-index: 20;
+  max-width: 1100px;
+  width: 100%;
+  margin: 40px auto 30px auto;
+  padding: 0 8px;
+  background: transparent;
+}
+
+/* BAR JUDUL */
+.teamBar {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  padding: 40px 0 30px;
+  background: transparent;
+}
+
+/* header dengan text gradient */
+.teamHeader {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* garis neon di bawah judul */
+.teamDivider {
+  width: 1120px;
+  max-width: 90vw;
+  height: 3px;
+  margin: 20px auto 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 7, 22, 0) 0%,
+    #00f5ff 18%,
+    #ff4fa6 50%,
+    #00f5ff 82%,
+    rgba(5, 7, 22, 0) 100%
+  );
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.75),
+    0 0 20px rgba(255, 79, 166, 0.9);
+}
+
+.teamHeadingTop,
+.teamHeadingBottom {
+  font-family: "Bebas Neue", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e5d7ff 30%,
+    #00f5ff 65%,
+    #ff4fa6 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-top: 20px;
+}
+
+.teamHeadingTop {
+  margin-bottom: 4px;
+}
+
+.teamHeadingBottom {
+  margin-top: 0;
+}
+
+/* list: 1 card = 1 layar */
+.teamList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* === KARTU TIM === */
+.teamCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 36px;
+  align-items: center;
+  padding: 22px 18px;
+  border-radius: 18px;
+
+  background: rgba(8, 10, 26, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+
+  box-shadow:
+    0 0 10px rgba(48, 238, 255, 0.22),
+    0 0 18px rgba(0, 0, 0, 0.45);
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.teamCard.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.teamCard:hover {
+  box-shadow:
+    0 0 12px rgba(48, 238, 255, 0.35),
+    0 0 22px rgba(48, 238, 255, 0.25);
+  border-color: rgba(48, 238, 255, 0.7);
+}
+
+/* foto */
+.teamPhotoWrapper {
+  position: relative;
+  width: 260px;
+  height: 100%;
+  margin-left: 28px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: transparent;
+  border: 2px solid rgba(48, 238, 255, 0.45);
+  box-shadow: 0 0 10px rgba(48, 238, 255, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.teamPhotoWrapper:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 0 14px rgba(48, 238, 255, 0.45);
+  border-color: rgba(48, 238, 255, 0.85);
+}
+
+.teamPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.teamPhotoWrapper:hover .teamPhoto {
+  transform: scale(1.06);
+}
+
+/* teks */
+.teamInfo {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 28px;
+}
+
+.teamName {
+  margin: 0 0 7px 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.teamCard:hover .teamName {
+  transform: translateX(3px);
+}
+
+.teamNpm {
+  margin: 0 0 9px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #a78bfa;
+  letter-spacing: 0.05em;
+  transition: transform 0.3s ease;
+}
+
+.teamCard:hover .teamNpm {
+  transform: translateX(3px);
+}
+
+.teamRole {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #e0e7ff;
+  max-width: 420px;
+  text-align: justify;
+  text-justify: inter-word;
+  transition: transform 0.3s ease;
+}
+
+.teamCardEven {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.teamCardEven .teamPhotoWrapper {
+  order: 2;
+  margin-left: 0;
+  margin-right: 28px;
+}
+
+.teamCardEven .teamInfo {
+  order: 1;
+  text-align: right;
+  align-items: flex-end;
+  margin-left: 0;
+  margin-right: 28px;
+}
+
+
+/* responsif */
+@media (max-width: 900px) {
+  .heroSection {
+    min-height: 90vh;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+    gap: 32px;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .teamBar {
+    padding: 30px 0 24px;
+  }
+
+  .teamCard,
+  .teamCardEven {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .teamPhotoWrapper {
+    margin-left: 0;
+    margin-right: 0;
+    width: 340px;
+  }
+
+  .teamInfo {
+    align-items: center;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .teamRole {
+    max-width: none;
+  }
+}
