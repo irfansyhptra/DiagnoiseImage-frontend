@@ -666,7 +666,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .resultCard {
@@ -679,8 +679,6 @@
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .resultCard::before {
@@ -734,16 +732,11 @@
 
 .resultImageWrapper {
   text-align: center;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .resultImage {
-  width: 100%;
   max-width: 100%;
+  width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 16px;
